@@ -1,10 +1,10 @@
 # Projeto-Redes-Transmissão-UDP
 Integrantes:
 
-Miriam Gonzaga da Silva Santos - <mgss4>
-Maria Gabriella Medeiros da Silva - <mgms>
-Lucas Jose Duarte Cavalcanti - <ljdc>
-Mario Daniel Teles da Silva Filho - <mdtsf>
+Miriam Gonzaga da Silva Santos - <mgss4> \n
+Maria Gabriella Medeiros da Silva - <mgms> \n
+Lucas Jose Duarte Cavalcanti - <ljdc> \n
+Mario Daniel Teles da Silva Filho - <mdtsf> \n
 
 Instruções para execução:
 
