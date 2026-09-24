@@ -1,5 +1,5 @@
 # Projeto-Redes-Transmissão-UDP
-Integrantes:
+Integrantes - Equipe 1:
 
 Miriam Gonzaga da Silva Santos - <mgss4> \n
 Maria Gabriella Medeiros da Silva - <mgms> \n
