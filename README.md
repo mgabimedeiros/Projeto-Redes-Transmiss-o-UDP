@@ -1,24 +1,100 @@
-# Projeto-Redes-Transmissão-UDP
-Integrantes - Equipe 1:
+# Projeto de Redes 2026.2 - Parte 1
 
-Miriam Gonzaga da Silva Santos - <mgss4> \n
-Maria Gabriella Medeiros da Silva - <mgms> \n
-Lucas Jose Duarte Cavalcanti - <ljdc> \n
-Mario Daniel Teles da Silva Filho - <mdtsf> \n
+**Universidade Federal de Pernambuco - UFPE**
 
-Instruções para execução:
+**CIN 0018 - Fundamentos de Redes de Computadores**
 
-Deve acontecer em dois terminais, um que vai rodar o Servidor e outro para o cliente, isso se deve pois o servidor permanece sempre ativo aguardando a chegada de novos arquivos. Os programas se conectam entre si a partir dos endereços com conexão socket.
+**Docente:** Renato Mariz de Moraes
 
-No primeiro terminal coloque "python servidor.py" -> o servidor vai iniciar e indicar que está esperando 
+**Equipe 1 - Integrantes:** Miriam Gonzaga da Silva Santos, Maria Gabriella Medeiros da Silva, Lucas Jose Duarte Cavalcanti e Mario Daniel Teles da Silva Filho
 
-Abra um segundo terminal e coloque"python cliente.py arquivos_teste/<nome do arquivo>" -> o cliente vai começar a enviar o arquivo e o servidor a receber, ao encerrar acontece o retorno, dessa forma:
+# Transmissão de Arquivos com UDP
 
-cliente envia arquivo -> servidor recebe e armazena em "arquivos_servidor" ->
-arquivo totalmente carregado e armazenado -> servidor envia arquivo para o cliente ->
-cliente recebe o arquivo e armazena em "arquivos_cliente"
+Esta parte do projeto implementa uma aplicação cliente-servidor através de transferência de arquivos via socket **UDP (User Datagram Protocol)** na linguagem Python, utilizando as bibliotecas socket, sys e os. 
 
-As respectivas pastas de armazenamento de arquivos (servidor e cliente) são criadas enquanto o programa estiver rodando
+Arquivos enviados do cliente são armazenados com o prefixo “servidor_” e devolvidos ao cliente com o prefixo “cliente_”. 
 
-Durante o envio e recebimento de arquivos é possível acompanhar o tamanho de cada pacote e em quantos pacotes um arquivo foi quebrado.
+## Estrutura
 
+- cliente.py (Arquivo python com o código do cliente UDP)
+- servidor.py (Arquivo python com o código do servidor UDP)
+- arquivos_teste  (Pasta de arquivos usados nos testes - formato txt e jpeg)
+- arquivos_cliente (Pasta de arquivos devolvidos pelo servidor - prefixo “cliente_” e formato txt e jpeg)
+- arquivos_servidor (Pasta de arquivos recebidos e salvos pelo servidor - prefixo “servidor_” e formato txt e jpeg)
+
+## Como Executar
+
+### Passo 1
+
+Abrir dois terminais na pasta do projeto; 
+
+### Passo 2
+
+No primeiro terminal, inicie o servidor com o comando `python servidor.py`
+
+Exemplo de saída esperada: `[SERVIDOR] escutando em 127.0.0.1:5000...`
+
+### Passo 3
+
+No segundo terminal, envie um arquivo do formato txt com o comando  `python cliente.py arquivos_teste/texto1.txt`  
+
+Exemplo de saída esperada: 
+
+```
+[CLIENTE] Enviando arquivo 'texto1.txt'...
+[CLIENTE] Pacote 1 enviado (519 bytes)
+[CLIENTE] Envio concluído: 1 pacotes.
+[CLIENTE] Aguardando devolução do servidor...
+[CLIENTE] Recebendo devolução do arquivo 'texto1.txt'...
+[CLIENTE] Pacote 1 recebido (519 bytes)
+[CLIENTE] Arquivo salvo como 'arquivos_cliente\cliente_texto1.txt' (519 bytes, 1 pacotes)
+```
+
+Envie um arquivo do formato jpeg com o comando `python cliente.py arquivos_teste/imagem1.jpg`
+
+Exemplo de saída esperada: 
+
+```
+[CLIENTE] Enviando arquivo 'imagem1.jpg'...
+[CLIENTE] Pacote 1 enviado (1024 bytes)
+[CLIENTE] Pacote 2 enviado (1024 bytes)
+[CLIENTE] Pacote 3 enviado (1024 bytes)
+[CLIENTE] Pacote 4 enviado (1024 bytes)
+[CLIENTE] Pacote 5 enviado (1024 bytes)
+[CLIENTE] Pacote 6 enviado (1024 bytes)
+[CLIENTE] Pacote 7 enviado (1024 bytes)
+[CLIENTE] Pacote 8 enviado (1024 bytes)
+[CLIENTE] Pacote 9 enviado (1024 bytes)
+[CLIENTE] Pacote 10 enviado (1024 bytes)
+[CLIENTE] Pacote 11 enviado (1024 bytes)
+[CLIENTE] Pacote 12 enviado (471 bytes)
+[CLIENTE] Envio concluído: 12 pacotes.
+[CLIENTE] Aguardando devolução do servidor...
+[CLIENTE] Recebendo devolução do arquivo 'imagem1.jpg'...
+[CLIENTE] Pacote 1 recebido (1024 bytes)
+[CLIENTE] Pacote 2 recebido (1024 bytes)
+[CLIENTE] Pacote 3 recebido (1024 bytes)
+[CLIENTE] Pacote 4 recebido (1024 bytes)
+[CLIENTE] Pacote 5 recebido (1024 bytes)
+[CLIENTE] Pacote 6 recebido (1024 bytes)
+[CLIENTE] Pacote 7 recebido (1024 bytes)
+[CLIENTE] Pacote 8 recebido (1024 bytes)
+[CLIENTE] Pacote 9 recebido (1024 bytes)
+[CLIENTE] Pacote 10 recebido (1024 bytes)
+[CLIENTE] Pacote 11 recebido (1024 bytes)
+[CLIENTE] Pacote 12 recebido (471 bytes)
+[CLIENTE] Arquivo salvo como 'arquivos_cliente\cliente_imagem1.jpg' (11735 bytes, 12 pacotes)
+```
+
+Ao rodar o programa, são criadas duas pastas: `arquivos_servidor`, pasta com arquivos recebidos e armazenados e a pasta `arquivos_cliente` , que armazena os arquivos recebidos. 
+
+## Testes Realizados
+
+Foram realizados teste com diferentes tamanhos, nos formatos .txt e .jpeg, com o objetivo de observar a diferença na quantidade de pacotes enviados. 
+
+- Arquivo de teste `texto1.txt` (Texto de 10 linhas - 519 bytes)
+- Arquivo de teste `texto2.txt` (Texto de 30 linhas)
+- Arquivo de teste `texto3.txt` (Texto de 60 linhas)
+- Arquivo de teste `imagem1.txt` (Imagem de 11.735 bytes)
+- Arquivo de teste `imagem2.txt` (Imagem de 51.108 bytes)
+- Arquivo de teste `imagem3.txt` (Imagem de 208.415 bytes)
